@@ -13,8 +13,6 @@
         public int StockMinimo { get; set; } = 5;
         public bool Activo { get; set; } = true;
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
-
-        // Relación
         public Categoria? Categoria { get; set; }
     }
 }

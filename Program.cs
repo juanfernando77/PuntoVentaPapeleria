@@ -11,11 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ============= CONFIGURACIÓN DE SERVICIOS =============
 
-// 1. Configurar DbContext con SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 2. Registrar servicios y helpers
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<JwtHelper>();
 
@@ -23,7 +21,8 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
-// 3. Configurar JWT Authentication
+builder.Services.AddScoped<IProveedorRepository, ProveedorRepository>();
+builder.Services.AddScoped<IProveedorService, ProveedorService>();
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["Secret"] ?? throw new InvalidOperationException("JWT Secret no configurado");
 
@@ -72,7 +71,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API para Sistema de Papelería"
     });
 
-    // Configurar Swagger para usar JWT
+ 
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Description = "JWT Authorization header usando el esquema Bearer. Ejemplo: 'Bearer {token}'",
@@ -112,17 +111,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// 2. HTTPS Redirection
 app.UseHttpsRedirection();
 
-// 3. CORS
 app.UseCors("AllowAngular");
 
-// 4. Autenticación y Autorización
 app.UseAuthentication();
 app.UseAuthorization();
 
-// 5. Mapear controladores
 app.MapControllers();
 
 app.Run();

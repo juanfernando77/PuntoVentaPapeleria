@@ -14,6 +14,6 @@
         public int StockMinimo { get; set; }
         public bool Activo { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public bool StockBajo { get; set; } // Indica si está por debajo del stock mínimo
+        public bool StockBajo { get; set; } 
     }
 }

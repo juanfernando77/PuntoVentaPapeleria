@@ -127,14 +127,14 @@ namespace PapeleriaAPI.Repositories
 
             if (esCompra)
             {
-                // Es una compra, aumentar stock
+                
                 producto.Stock += cantidad;
             }
             else
             {
-                // Es una venta, disminuir stock
+               
                 if (producto.Stock < cantidad)
-                    return false; // No hay suficiente stock
+                    return false; 
 
                 producto.Stock -= cantidad;
             }

@@ -8,8 +8,6 @@
         public int Cantidad { get; set; }
         public decimal PrecioVenta { get; set; }
         public decimal Subtotal { get; set; }
-
-        // Relaciones
         public Venta? Venta { get; set; }
         public Producto? Producto { get; set; }
     }

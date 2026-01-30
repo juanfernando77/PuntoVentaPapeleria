@@ -69,7 +69,6 @@ namespace PapeleriaAPI.Services
         {
             try
             {
-                // Verificar que la categoría existe
                 if (!await _categoriaRepository.Exists(idCategoria))
                 {
                     return new ApiResponse<IEnumerable<ProductoDto>>
@@ -191,7 +190,6 @@ namespace PapeleriaAPI.Services
         {
             try
             {
-                // Validar que la categoría existe
                 if (!await _categoriaRepository.Exists(request.IdCategoria))
                 {
                     return new ApiResponse<ProductoDto>
@@ -200,8 +198,6 @@ namespace PapeleriaAPI.Services
                         Message = "La categoría seleccionada no existe"
                     };
                 }
-
-                // Validar que el código no existe
                 if (await _productoRepository.ExistsByCodigo(request.Codigo))
                 {
                     return new ApiResponse<ProductoDto>
@@ -210,8 +206,6 @@ namespace PapeleriaAPI.Services
                         Message = "Ya existe un producto con ese código"
                     };
                 }
-
-                // Validar que el precio de venta sea mayor al de compra
                 if (request.PrecioVenta <= request.PrecioCompra)
                 {
                     return new ApiResponse<ProductoDto>
@@ -268,8 +262,6 @@ namespace PapeleriaAPI.Services
                         Message = "Producto no encontrado"
                     };
                 }
-
-                // Validar que la categoría existe
                 if (!await _categoriaRepository.Exists(request.IdCategoria))
                 {
                     return new ApiResponse<ProductoDto>
@@ -278,8 +270,6 @@ namespace PapeleriaAPI.Services
                         Message = "La categoría seleccionada no existe"
                     };
                 }
-
-                // Validar que el código no existe en otro producto
                 if (await _productoRepository.ExistsByCodigo(request.Codigo, id))
                 {
                     return new ApiResponse<ProductoDto>
@@ -288,8 +278,6 @@ namespace PapeleriaAPI.Services
                         Message = "Ya existe otro producto con ese código"
                     };
                 }
-
-                // Validar que el precio de venta sea mayor al de compra
                 if (request.PrecioVenta <= request.PrecioCompra)
                 {
                     return new ApiResponse<ProductoDto>
@@ -360,7 +348,6 @@ namespace PapeleriaAPI.Services
             }
         }
 
-        // Método auxiliar para mapear Producto a ProductoDto
         private ProductoDto MapToDto(Producto producto)
         {
             return new ProductoDto

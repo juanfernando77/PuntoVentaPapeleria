@@ -15,8 +15,6 @@
         public decimal Diferencia { get; set; }
         public string? Observaciones { get; set; }
         public bool Cerrado { get; set; } = false;
-
-        // Relación
         public Usuario? Usuario { get; set; }
     }
 }

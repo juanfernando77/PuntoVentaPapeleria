@@ -97,7 +97,6 @@ namespace PapeleriaAPI.Services
         {
             try
             {
-                // Validar si ya existe una categoría con el mismo nombre
                 if (await _categoriaRepository.ExistsByNombre(request.Nombre))
                 {
                     return new ApiResponse<CategoriaDto>
@@ -148,8 +147,6 @@ namespace PapeleriaAPI.Services
                         Message = "Categoría no encontrada"
                     };
                 }
-
-                // Validar si el nuevo nombre ya existe en otra categoría
                 if (await _categoriaRepository.ExistsByNombre(request.Nombre, id))
                 {
                     return new ApiResponse<CategoriaDto>
@@ -214,7 +211,6 @@ namespace PapeleriaAPI.Services
             }
         }
 
-        // Método auxiliar para mapear Categoria a CategoriaDto
         private CategoriaDto MapToDto(Categoria categoria)
         {
             return new CategoriaDto

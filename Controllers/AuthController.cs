@@ -15,9 +15,6 @@ namespace PapeleriaAPI.Controllers
             _authService = authService;
         }
 
-        /// <summary>
-        /// Login de usuario
-        /// </summary>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
@@ -31,9 +28,6 @@ namespace PapeleriaAPI.Controllers
             return Ok(response);
         }
 
-        /// <summary>
-        /// Registro de nuevo usuario
-        /// </summary>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {

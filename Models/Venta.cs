@@ -9,7 +9,7 @@
         public decimal Subtotal { get; set; }
         public decimal IVA { get; set; }
         public decimal Total { get; set; }
-        public string MetodoPago { get; set; } = "Efectivo"; // Efectivo, Tarjeta, Transferencia
+        public string MetodoPago { get; set; } = "Efectivo"; 
         public decimal MontoPagado { get; set; }
         public decimal Cambio { get; set; }
 

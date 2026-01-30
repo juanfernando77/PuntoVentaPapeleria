@@ -16,10 +16,6 @@ namespace PapeleriaAPI.Controllers
         {
             _productoService = productoService;
         }
-
-        /// <summary>
-        /// Obtener todos los productos
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -30,10 +26,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Obtener solo los productos activos
-        /// </summary>
         [HttpGet("activos")]
         public async Task<IActionResult> GetAllActivos()
         {
@@ -44,10 +36,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Obtener productos por categoría
-        /// </summary>
         [HttpGet("categoria/{idCategoria}")]
         public async Task<IActionResult> GetByCategoria(int idCategoria)
         {
@@ -58,10 +46,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Obtener productos con stock bajo
-        /// </summary>
         [HttpGet("bajo-stock")]
         public async Task<IActionResult> GetProductosBajoStock()
         {
@@ -72,10 +56,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Obtener un producto por ID
-        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -86,10 +66,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Obtener un producto por código
-        /// </summary>
         [HttpGet("codigo/{codigo}")]
         public async Task<IActionResult> GetByCodigo(string codigo)
         {
@@ -100,10 +76,6 @@ namespace PapeleriaAPI.Controllers
 
             return Ok(response);
         }
-
-        /// <summary>
-        /// Crear un nuevo producto
-        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,Almacenista")]
         public async Task<IActionResult> Create([FromBody] CreateProductoRequest request)
@@ -118,10 +90,6 @@ namespace PapeleriaAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = response.Data!.IdProducto }, response);
         }
-
-        /// <summary>
-        /// Actualizar un producto existente
-        /// </summary>
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Almacenista")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateProductoRequest request)
@@ -137,9 +105,6 @@ namespace PapeleriaAPI.Controllers
             return Ok(response);
         }
 
-        /// <summary>
-        /// Eliminar un producto (eliminación lógica)
-        /// </summary>
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)

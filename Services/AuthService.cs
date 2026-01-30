@@ -21,7 +21,6 @@ namespace PapeleriaAPI.Services
         {
             try
             {
-                // Buscar usuario por email
                 var usuario = await _context.Usuarios
                     .FirstOrDefaultAsync(u => u.Email == request.Email);
 
@@ -34,7 +33,6 @@ namespace PapeleriaAPI.Services
                     };
                 }
 
-                // Verificar contraseña
                 if (!BCrypt.Net.BCrypt.Verify(request.Password, usuario.PasswordHash))
                 {
                     return new AuthResponse
@@ -44,7 +42,6 @@ namespace PapeleriaAPI.Services
                     };
                 }
 
-                // Verificar si está activo
                 if (!usuario.Activo)
                 {
                     return new AuthResponse
@@ -54,7 +51,6 @@ namespace PapeleriaAPI.Services
                     };
                 }
 
-                // Generar token
                 var token = _jwtHelper.GenerarToken(usuario);
 
                 return new AuthResponse
@@ -86,7 +82,6 @@ namespace PapeleriaAPI.Services
         {
             try
             {
-                // Verificar si el email ya existe
                 var existeEmail = await _context.Usuarios
                     .AnyAsync(u => u.Email == request.Email);
 
@@ -99,7 +94,6 @@ namespace PapeleriaAPI.Services
                     };
                 }
 
-                // Validar rol
                 var rolesValidos = new[] { "Admin", "Cajero", "Almacenista" };
                 if (!rolesValidos.Contains(request.Rol))
                 {
@@ -110,7 +104,7 @@ namespace PapeleriaAPI.Services
                     };
                 }
 
-                // Crear nuevo usuario
+            
                 var nuevoUsuario = new Usuario
                 {
                     NombreUsuario = request.NombreUsuario,
@@ -124,7 +118,7 @@ namespace PapeleriaAPI.Services
                 _context.Usuarios.Add(nuevoUsuario);
                 await _context.SaveChangesAsync();
 
-                // Generar token
+              
                 var token = _jwtHelper.GenerarToken(nuevoUsuario);
 
                 return new AuthResponse
